@@ -9,7 +9,7 @@ class Icon{
     this.filename = filename;
     this.name = name;
     this.image = loadImage(filename);
-    this.width = 75;
+    this.width = 68;
     this.matched = false;
   }
   

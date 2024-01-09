@@ -6,7 +6,9 @@ ArrayList<Icon> icons = new ArrayList();
 String searchString = "";
 
 void setup(){
-	size(1800, 980);
+	size(1700, 1080);
+  frameRate(30);
+  windowTitle("Theophilus Nenhanga - CMPT 481 - Assignment 1");
 	for (int i = 0; i < filenames.length; i++){
 		icons.add(new Icon("./images/" + filenames[i], appnames[i]));
 	}
@@ -26,17 +28,22 @@ void searchMatches(String substring){
 // This function runs continuously. Like a game loop / update function
 void draw(){
 	int iconCount = icons.size();
-	int iconsPerRow = 30;
+	int iconsPerRow = 25;
 	int rowNum = 0;
+  textSize(15);
 
 	for (int i = 0; i < iconCount; i++){
 		Icon img = icons.get(i);
 		if (!(icons.get(i).isMatched())){
 			tint(100, 128); // must go before the image is drawn to the screen
+      fill(0, 0, 0, 20);
 		}else{
+      fill(0, 0, 0);
 			noTint();
 		}
-		image(img.getImage(), i % iconsPerRow * img.getWidth(), rowNum*img.getWidth(), img.getWidth(), img.getWidth());
+		image(img.getImage(), i % iconsPerRow * img.getWidth(), rowNum*img.getWidth(), img.getWidth()*0.75, img.getWidth()*0.75);
+    textAlign(LEFT, TOP);
+    text(img.getName(), i % iconsPerRow * img.getWidth(), rowNum*img.getWidth() + img.getWidth()* 0.75, img.getWidth(), img.getWidth() * 0.25);
 		if ((i+1) % iconsPerRow == 0){
 			rowNum += 1;
 		}
@@ -53,5 +60,6 @@ void draw(){
 	}
 	if (mousePressed){
 		searchString = "";
+    searchMatches(searchString);
 	}
 }
